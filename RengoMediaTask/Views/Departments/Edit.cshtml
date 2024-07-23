@@ -1,0 +1,43 @@
+﻿@using RengoMediaTask.ViewModels
+@model DepartmentEditViewModel
+@{
+    ViewData["Title"] = "Edit Department";
+}
+
+<h2>Edit Department</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Current Logo</label>
+        @if (Model.ExistingLogoPath != null)
+        {
+            <div>
+                <img src="@Model.ExistingLogoPath" alt="Current Logo" width="100" height="100" />
+            </div>
+        }
+    </div>
+    <div class="form-group">
+        <label class="control-label">New Logo</label>
+        <input type="file" asp-for="Logo" class="form-control" />
+        <span asp-validation-for="Logo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ParentDepartmentId" class="control-label">Parent Department</label>
+        <select asp-for="ParentDepartmentId" class="form-control" asp-items="Model.ParentDepartments">
+            <option value="">None</option>
+        </select>
+        <span asp-validation-for="ParentDepartmentId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save Changes" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

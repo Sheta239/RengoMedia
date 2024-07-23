@@ -1,0 +1,45 @@
+﻿@model DepartmentDetailsViewModel
+@{
+    ViewData["Title"] = "Department Details";
+}
+
+<h2>@Model.Department.Name</h2>
+
+<div class="form-group">
+    <label class="control-label">Logo</label>
+    @if (!string.IsNullOrEmpty(Model.Department.LogoPath))
+    {
+        <div>
+            <img src="@Model.Department.LogoPath" alt="@Model.Department.Name" width="150" height="150" />
+        </div>
+    }
+    else
+    {
+        <div>No logo available</div>
+    }
+</div>
+
+<div class="form-group">
+    <label class="control-label">Sub-Departments</label>
+    <ul>
+        @foreach (var subDepartment in Model.SubDepartments)
+        {
+            <li>@subDepartment.Name</li>
+        }
+    </ul>
+</div>
+
+<div class="form-group">
+    <label class="control-label">Parent Departments</label>
+    <ul>
+        @foreach (var parentDepartment in Model.ParentDepartments)
+        {
+            <li>@parentDepartment.Name</li>
+        }
+    </ul>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Department.Id" class="btn btn-primary">Edit</a> |
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
